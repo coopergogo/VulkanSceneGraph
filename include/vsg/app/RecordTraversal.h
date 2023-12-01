@@ -14,6 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include <vsg/core/Mask.h>
 #include <vsg/core/Object.h>
+#include <vsg/core/Version.h>
 #include <vsg/core/type_name.h>
 #include <vsg/maths/mat4.h>
 

@@ -47,6 +47,12 @@ CommandGraph::~CommandGraph()
 {
 }
 
+ref_ptr<RecordTraversal> CommandGraph::getOrCreateRecordTraversal()
+{
+    if (!recordTraversal) recordTraversal = RecordTraversal::create(maxSlot);
+    return recordTraversal;
+}
+
 VkCommandBufferLevel CommandGraph::level() const
 {
     return VK_COMMAND_BUFFER_LEVEL_PRIMARY;
