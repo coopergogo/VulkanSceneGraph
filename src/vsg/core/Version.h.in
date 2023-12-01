@@ -36,6 +36,9 @@ extern "C"
     /// Native Windowing support provided with vsg::Window::create(windowTraits) enabled when 1, disabled when 0
     #define VSG_SUPPORTS_Windowing @VSG_SUPPORTS_Windowing@
 
+    /// Enable/disable the declaration of virtual ReocordTraversal::apply methods
+    #define VSG_virtual_RecordTraversal_apply @VSG_virtual_RecordTraversal_apply@
+
     struct VsgVersion
     {
         unsigned int major;

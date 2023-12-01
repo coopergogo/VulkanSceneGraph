@@ -85,6 +85,8 @@ if (VSG_SUPPORTS_Windowing)
     endif()
 endif()
 
+set(VSG_virtual_RecordTraversal_apply 0 CACHE STRING "(), 0 for non virtual RecordTraversal::apply methods, 1 for virtual RecordTraversal::apply mehthods." )
+
 # this line needs to be after the call to setup_build_vars()
 configure_file("${VSG_SOURCE_DIR}/src/vsg/core/Version.h.in" "${VSG_VERSION_HEADER}")
 

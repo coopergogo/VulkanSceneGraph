@@ -54,6 +54,14 @@ namespace vsg
     class CommandGraph;
     class RecordedCommandBuffers;
 
+    #if VSG_virtual_RecordTraversal_apply
+        // slower but enables subclassing of RecordTraversal to override apply methods.
+        #define VSG_RecordTraversal_apply_prefix virtual
+    #else
+        // faster but prevents subclasses from override apply methods
+        #define VSG_RecordTraversal_apply_prefix
+    #endif
+
     VSG_type_name(vsg::RecordTraversal);
 
     /// RecordTraversal traverses a scene graph doing view frustum culling and invoking state/commands to record them to a Vulkan command buffer
@@ -95,38 +103,38 @@ namespace vsg
         void setDatabasePager(DatabasePager* dp);
         DatabasePager* getDatabasePager() { return _databasePager; }
 
-        void apply(const Object& object);
+        VSG_RecordTraversal_apply_prefix void apply(const Object& object);
 
         // scene graph nodes
-        void apply(const Group& group);
-        void apply(const QuadGroup& quadGroup);
-        void apply(const LOD& lod);
-        void apply(const PagedLOD& pagedLOD);
-        void apply(const CullGroup& cullGroup);
-        void apply(const CullNode& cullNode);
-        void apply(const DepthSorted& depthSorted);
-        void apply(const Switch& sw);
+        VSG_RecordTraversal_apply_prefix void apply(const Group& group);
+        VSG_RecordTraversal_apply_prefix void apply(const QuadGroup& quadGroup);
+        VSG_RecordTraversal_apply_prefix void apply(const LOD& lod);
+        VSG_RecordTraversal_apply_prefix void apply(const PagedLOD& pagedLOD);
+        VSG_RecordTraversal_apply_prefix void apply(const CullGroup& cullGroup);
+        VSG_RecordTraversal_apply_prefix void apply(const CullNode& cullNode);
+        VSG_RecordTraversal_apply_prefix void apply(const DepthSorted& depthSorted);
+        VSG_RecordTraversal_apply_prefix void apply(const Switch& sw);
 
         // positional state
-        void apply(const Light& light);
-        void apply(const AmbientLight& light);
-        void apply(const DirectionalLight& light);
-        void apply(const PointLight& light);
-        void apply(const SpotLight& light);
+        VSG_RecordTraversal_apply_prefix void apply(const Light& light);
+        VSG_RecordTraversal_apply_prefix void apply(const AmbientLight& light);
+        VSG_RecordTraversal_apply_prefix void apply(const DirectionalLight& light);
+        VSG_RecordTraversal_apply_prefix void apply(const PointLight& light);
+        VSG_RecordTraversal_apply_prefix void apply(const SpotLight& light);
 
         // Vulkan nodes
-        void apply(const Transform& transform);
-        void apply(const MatrixTransform& mt);
-        void apply(const StateGroup& object);
-        void apply(const Commands& commands);
-        void apply(const Command& command);
+        VSG_RecordTraversal_apply_prefix void apply(const Transform& transform);
+        VSG_RecordTraversal_apply_prefix void apply(const MatrixTransform& mt);
+        VSG_RecordTraversal_apply_prefix void apply(const StateGroup& object);
+        VSG_RecordTraversal_apply_prefix void apply(const Commands& commands);
+        VSG_RecordTraversal_apply_prefix void apply(const Command& command);
 
         // Viewer level nodes
-        void apply(const View& view);
-        void apply(const CommandGraph& commandGraph);
+        VSG_RecordTraversal_apply_prefix void apply(const View& view);
+        VSG_RecordTraversal_apply_prefix void apply(const CommandGraph& commandGraph);
 
         // clear the bins to record a new frame.
-        void clearBins();
+        virtual void clearBins();
 
     protected:
         virtual ~RecordTraversal();
