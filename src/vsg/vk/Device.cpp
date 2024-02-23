@@ -52,7 +52,7 @@ static void releaseDeviceID(uint32_t deviceID)
 }
 
 Device::Device(PhysicalDevice* physicalDevice, const QueueSettings& queueSettings, Names layers, Names deviceExtensions, const DeviceFeatures* deviceFeatures, AllocationCallbacks* allocator) :
-    deviceID(getUniqueDeviceID()),
+    deviceID(0),
     _instance(physicalDevice->getInstance()),
     _physicalDevice(physicalDevice),
     _allocator(allocator)
