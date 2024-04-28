@@ -139,6 +139,17 @@ namespace vsg
                          0, 0, (zFar * zNear) * r, 0);
     }
 
+    template<typename T>
+    constexpr t_mat4<T> perspective_with_offset(T fovy_radians, T aspectRatio, T zNear, T zFar, T offset_x, T offset_y)
+    {
+        T f = static_cast<T>(1.0 / std::tan(fovy_radians * 0.5));
+        T r = static_cast<T>(1.0 / (zFar - zNear));
+        return t_mat4<T>(f / aspectRatio, 0, 0, 0,
+                         0, -f, 0, 0,
+                         -offset_x, offset_y, zNear * r, -1,
+                         0, 0, (zFar * zNear) * r, 0);
+    }
+
     /// create a 4x4 matrix for a Reverse depth perspective matrix, convention: 1 to 0 depth range. Y NDC coordinates are inverted in Vulkan.
     template<typename T>
     constexpr t_mat4<T> perspective(T left, T right, T bottom, T top, T zNear, T zFar)

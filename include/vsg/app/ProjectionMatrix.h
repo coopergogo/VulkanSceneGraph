@@ -56,7 +56,15 @@ namespace vsg
         {
         }
 
-        dmat4 transform() const override { return perspective(radians(fieldOfViewY), aspectRatio, nearDistance, farDistance); }
+        Perspective(double fov, double ar, double nd, double fd, double x, double y) 
+            : fieldOfViewY(fov),
+              aspectRatio(ar),
+              nearDistance(nd),
+              farDistance(fd),
+              offset_x(x),
+              offset_y(y) {}
+
+        dmat4 transform() const override { return perspective_with_offset(radians(fieldOfViewY), aspectRatio, nearDistance, farDistance, offset_x, offset_y); }
 
         void changeExtent(const VkExtent2D&, const VkExtent2D& newExtent) override
         {
@@ -70,6 +78,8 @@ namespace vsg
         double aspectRatio;
         double nearDistance;
         double farDistance;
+        double offset_x = 0.0;
+        double offset_y = 0.0;
     };
     VSG_type_name(vsg::Perspective);
 
